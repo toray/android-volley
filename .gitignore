@@ -9,7 +9,6 @@ local.properties
 gen-external-apklibs
 target
 classes
-project.properties
 *.iml
 .DS_Store
 out
