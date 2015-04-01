@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-./gradlew -x test clean assembleRelease uploadArchives
+./gradlew -b deploy.gradle clean build uploadArchives

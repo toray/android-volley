@@ -41,7 +41,7 @@ public class Volley {
      * @param maxDiskCacheBytes the maximum size of the disk cache, in bytes. Use -1 for default size.
      * @return A started {@link RequestQueue} instance.
      */
-    public static RequestQueue newRequestQueue(Context context, HttpStack stack, int maxDiskCacheBytes) {
+    public static RequestQueue newRequestQueue(Context context, HttpStack stack, int maxDiskCacheBytes, String proxyHost, int proxyPort) {
         File cacheDir = new File(context.getCacheDir(), DEFAULT_CACHE_DIR);
 
         String userAgent = "volley/0";
@@ -54,7 +54,7 @@ public class Volley {
 
         if (stack == null) {
             if (Build.VERSION.SDK_INT >= 9) {
-                stack = new HurlStack();
+                stack = new HurlStack(proxyHost, proxyPort);
             } else {
                 // Prior to Gingerbread, HttpUrlConnection was unreliable.
                 // See: http://android-developers.blogspot.com/2011/09/androids-http-clients.html
@@ -113,6 +113,10 @@ public class Volley {
      */
     public static RequestQueue newRequestQueue(Context context) {
         return newRequestQueue(context, null);
+    }
+
+	public static RequestQueue newRequestQueue(Context context, String proxyHost, int proxyPort) {
+        return newRequestQueue(context, null, proxyHost, proxyPort);
     }
 
 }

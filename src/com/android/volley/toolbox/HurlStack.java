@@ -50,6 +50,11 @@ public class HurlStack implements HttpStack {
 
     private static final String HEADER_CONTENT_TYPE = "Content-Type";
 
+	//----Add Proxy begin---
+    private static String PROXY_HOST;
+    private static int PROXY_PORT;
+    //----Add Proxy End  ---
+
     /**
      * An interface for transforming URLs before use.
      */
@@ -66,6 +71,12 @@ public class HurlStack implements HttpStack {
 
     public HurlStack() {
         this(null);
+    }
+
+	public HurlStack(String proxyHost, int proxyPort) {
+    	this(null);
+    	PROXY_HOST = proxyHost;
+    	PROXY_PORT = proxyPort;
     }
 
     /**
@@ -149,7 +160,12 @@ public class HurlStack implements HttpStack {
      * Create an {@link HttpURLConnection} for the specified {@code url}.
      */
     protected HttpURLConnection createConnection(URL url) throws IOException {
-        return (HttpURLConnection) url.openConnection();
+        if(!TextUtils.isEmpty(PROXY_HOST) && PROXY_PORT > 0) {
+//    		System.out.println("====================openConnection by proxy:host:" + PROXY_HOST);
+    		return (HttpURLConnection) url.openConnection(new Proxy(Proxy.Type.HTTP, new InetSocketAddress(PROXY_HOST, PROXY_PORT)));	
+    	}
+//    	System.out.println("====================openConnection not by proxy");
+    	return (HttpURLConnection) url.openConnection();
     }
 
     /**
