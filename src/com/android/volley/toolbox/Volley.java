@@ -102,7 +102,7 @@ public class Volley {
      */
     public static RequestQueue newRequestQueue(Context context, HttpStack stack)
     {
-    	return newRequestQueue(context, stack, -1);
+    	return newRequestQueue(context, stack, -1, null, 0);
     }
     
     /**
@@ -116,7 +116,7 @@ public class Volley {
     }
 
 	public static RequestQueue newRequestQueue(Context context, String proxyHost, int proxyPort) {
-        return newRequestQueue(context, null, proxyHost, proxyPort);
+        return newRequestQueue(context, null, -1, proxyHost, proxyPort);
     }
 
 }

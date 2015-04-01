@@ -16,6 +16,8 @@
 
 package com.android.volley.toolbox;
 
+import android.text.TextUtils;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Request.Method;
@@ -34,6 +36,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
